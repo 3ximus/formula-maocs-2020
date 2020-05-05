@@ -2,4 +2,4 @@ discord_token
 google_sheets_creds.json
 formula_moacs.psd
 results.lnk
-cogs/__pycache__/*
+cogs/__pycache__
