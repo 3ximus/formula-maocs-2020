@@ -1,0 +1,21 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "python 'c:/Users/fabio/Desktop/Formula Moacs 2020/formula_moacs_bot.py'",
+            "problemMatcher": [],
+            "runOptions": {
+                "instanceLimit": 1
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+
+    ]
+}
