@@ -44,7 +44,6 @@ class Standings(commands.Cog):
                             value=f"**{row['Points']}** points  ----  {user.mention}", inline=False)
         
         await context.send(embed=embed)
-    
         
     @commands.command(name='last', aliases=['l', 'previous'])
     async def _last_race(self, context, *args):
@@ -78,7 +77,9 @@ class Standings(commands.Cog):
         embed = discord.Embed(
             title = f"{race['Flag']}  {race['Name']} Grand Prix",
             description = f":date: {race['Date']} : {race['Hora']}",
-            colour = discord.Color.dark_red()
+            colour = discord.Color.dark_red(),
+            type='video',
+            video=self.race_times[-1][f"Race #{race['ID']}"],
         )
 
         race = f"Race #{race['ID']}"
@@ -89,6 +90,11 @@ class Standings(commands.Cog):
             embed = self.generate_race_info(embed, race)
             
         await context.send(embed=embed)
+        
+        youtube_url = self.race_times[-1][race]
+        if (youtube_url != ''):
+            await context.send(youtube_url)
+
     
     def generate_qualifying_info(self, embed, race):
         """Completes embed with Qualifying information of a specific race"""
@@ -109,11 +115,6 @@ class Standings(commands.Cog):
         race_data.sort(key=lambda x: x[0], reverse=True)
 
         embed.description = f"=== **Race  {self.race_standings[-1][race]} Laps** ===\n" + embed.description
-        
-        youtube_url = self.race_times[-1][race]
-        if (youtube_url != ''):
-            embed.url = youtube_url
-            embed.set_image(url=f"https://img.youtube.com/vi/{youtube_url[youtube_url.find('v=')+2:]}/mqdefault.jpg")
 
         winner_time = race_data[0][4]
         for i, data in enumerate(race_data):

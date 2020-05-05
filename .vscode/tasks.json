@@ -6,7 +6,7 @@
         {
             "label": "Run",
             "type": "shell",
-            "command": "python 'c:/Users/fabio/Desktop/Formula Moacs 2020/formula_moacs_bot.py'",
+            "command": "python 'c:/Users/fabio/Desktop/formula-maocs-2020/formula_moacs_bot.py'",
             "problemMatcher": [],
             "runOptions": {
                 "instanceLimit": 1
