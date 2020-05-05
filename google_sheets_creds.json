@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "formula-project-2020",
+  "private_key_id": "f5739a6db509488b19636cc140ae67f465973e34",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDx0UqR4IQ9tuXO\nShzdNjoGaB7+OD1WGtnICjg58l//XcdiIrIOGjsoh5X4Dui7pdfn/4pYwgabUVzw\n3KqExETrZQ7QXF4ECXyQ3q5WWbUlG/8wZNm7kstBEa4iJQUXBQFVqdejyTOY1h6C\nNnOiFg8gOSoFII7we7teInwmXP1Ie+HjywS2/OmEwfYrrkFDFdQT+nLqhpuiM2MZ\niqVBHfdjvZ+suxJjhu8r2UlDpbCMw9hxLdUw46ucLpeSsHD53wJq24Xo+iRosMk/\nSZlNtA9l7GgerutLZLiXLOSy0Lyn00D/dvyYaIRJYTVqCuBiHzvWKgbKT1eYg2FW\nOFjUphJVAgMBAAECggEAAP2d1aMYDvlkxum+OBGxH3gduV68s+gemQHbofw9idM1\ncp32ht76yZXzZvXn2ktssoPQzpeqWsODyAazGL/sugZ9pXuAfb/t3dbWxPppzdU9\nOLbX4dmdtjIs67KHGZmOzTgqXmB8K2tqcdO4vkBi+PU6/w+lU5qIINbKzzsh0RUG\niHlWOcP12kZaVbUzey0KXCRYkCWVn/c4c6zhMDdRUNWZA4+j8l63U4gTdiiO+gst\n8i1cMGtnqWCkA3tzY4+Y6eYRgYWUPI54vouxNJWsUmkBTTkg0xtwpUt6MufqddXk\nrbKfghSucuxG9QEMYErpWhI5c1uZ3Fcl7Jyni+WGsQKBgQD+hq4HJaYuJzLq4UZn\nRio1+JPtkeDe/+Eh6HBI4YY8zKVmbxcjXYkT2vJrDF80KNuwSBouB7N5P/lETEg6\nwWNxZADhFIkKArviVYMwXAz4qbWAUfdR/j4rLldZyzBwuDeaeKrH9/0jQYPUT7fU\nMcLrpxP63nNH0SzSFCwPSbN10QKBgQDzN8WU69Hgr6exNcTo4ROQOrl6Qx1Van19\n0Aio/5wZ7CIo8ikL39ohNMPW6721RYXbdZJDhhk7RmWk9/oKnw73U6mNUF3ySy7F\njbNCnJCBTtuAwMSCVrVo/JoIMNXSoBA7Cimor0BFnzjAF5NijdpRUBJKmAXEq3zW\nnPon75mBRQKBgQCVcd6cs65vSvTKlJsR6FDAf8PbqduvE+7MSf4jzMdUy5QSIQgk\n67agwd20nP8JUTQsvSkh/cOTXcyuHVwLo6EP4vfhMH2GMzS+IBd3PZUgLAU14uqk\nafN2xy7iujsm9AMx38fmweUP3lfZQTVekhkw5FkG47YsZNU8RDvafhuxAQKBgQDV\nQ+Aylx1vgVbvopBJC6NV4shklpkQHtJvEY2mcov0hwPlF4I6cU0ZtOTMfeXZH18i\nclOQdfOF8FKMdwx/Z719zZRs3z2hiZ83huray+JCIF2E5oLpLxLfPi/qYrf7enMA\n8gZZbWJUKite9M09q9j1V9rSIb9dFmne3cLUZdoaaQKBgELypOGs5u79m3vAvT70\nPtQjAgsiEu8Wx/5mHjtG8fhHF8tWZA8bGEDmDt2iuIgMvWGGIiYProJ4lTBEXfe1\nY1tH29xPPlcXbic6nrvrniGfwgeyFJYxoK1t4dY3prFna+E8SisvKXjf6bI/XRcb\n0phuRTQCff98CMxMHBcS9f46\n-----END PRIVATE KEY-----\n",
+  "client_email": "eximus@formula-project-2020.iam.gserviceaccount.com",
+  "client_id": "104420105549908961063",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/eximus%40formula-project-2020.iam.gserviceaccount.com"
+}
