@@ -12,6 +12,7 @@ if len(sys.argv) == 1:
 else:
     data_file = sys.argv[1]
 
+
 # SETUP GOOGLE SHEETS
 scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_name("google_sheets_creds.json", scope)
