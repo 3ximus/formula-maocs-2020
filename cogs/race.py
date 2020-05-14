@@ -42,11 +42,13 @@ class Race(commands.Cog):
         # create embed
         embed = discord.Embed(
             title = f"{race['Flag']}  {race['Name']} Grand Prix",
-            description = f"{race['Track Name']}\n:date: {race['Date']} : {race['Hora']}   [Download track]({race['Link']})",
+            description = f"{race['Track Name']}\n[Download track]({race['Link']})",
             colour = discord.Color.dark_red()
         )
         embed.set_image(url=f"https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/{race['Name']}.jpg.transform/9col/image.jpg")
         embed.add_field(name='Members', value='-')
+        embed.set_footer(text=f"{race['Date']} : {race['Hora']}",
+                icon_url='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/openmoji/242/spiral-calendar_1f5d3.png')
         msg = await context.send(embed=embed)
 
         # limit voting to only these users
