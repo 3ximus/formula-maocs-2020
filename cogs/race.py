@@ -47,6 +47,7 @@ class Race(commands.Cog):
         )
         embed.set_image(url=f"https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/{race['Name']}.jpg.transform/9col/image.jpg")
         embed.add_field(name='Members', value='-')
+        embed.set_footer(text=f'Download track >>> {race["Link"]}')
         msg = await context.send(embed=embed)
 
         # limit voting to only these users
