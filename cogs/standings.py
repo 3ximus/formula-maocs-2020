@@ -4,7 +4,7 @@ from discord.ext import commands
 from datetime import datetime
 
 class Standings(commands.Cog):
-    TIMING_FORMATS = "%M:%S:%f"
+    TIMING_FORMATS = "%M:%S.%f"
     def __init__(self, bot, spread):
         self.bot = bot
         self.spread = spread
@@ -40,8 +40,9 @@ class Standings(commands.Cog):
         for row in self.leaderboard:
             if row['Name'] == '': break
             user = self.bot.get_user(int(row['Discord ID']))
+            penalty = f'[-{row["Penalty"]} Points] ' if row['Penalty'] else ''
             embed.add_field(name=f"**#{row['#']}**  {row['Team']}  {row['Name']}",
-                            value=f"**{row['Points']}** points  ----  {user.mention}", inline=False)
+                            value=f"**{row['Points']}** points {penalty}----  {user.mention}", inline=False)
         
         await context.send(embed=embed)
         
@@ -102,11 +103,13 @@ class Standings(commands.Cog):
         race_data.sort(key=lambda x: x[0])
         embed.description = "==== **Qualifying** ====\n" + embed.description
         
-        pole_time = race_data[0][4]
+        pole_time = race_data[0][4].split()[0].strip()
         for i, data in enumerate(race_data):
             user = self.bot.get_user(int(data[2]))
+            time = self.get_relative_time(pole_time, data[4].split()[0].strip()) if i != 0 else pole_time
+            tyres = data[4].split()[-1].split()[-1]
             embed.add_field(name=f"**#{i+1}**  {data[1]}  {data[3]}",
-                            value=f"**{self.get_relative_time(pole_time, data[4]) if i != 0 else data[4]}** ---- {user.mention}", inline=False)
+                            value=f"**{time}** [{tyres}] ---- {user.mention}", inline=False)
         return embed
 
     def generate_race_info(self, embed, race):
@@ -116,10 +119,12 @@ class Standings(commands.Cog):
 
         embed.description = f"=== **Race  {self.race_standings[-1][race]} Laps** ===\n" + embed.description
 
-        winner_time = race_data[0][4]
+        winner_time = race_data[0][4].split()[0].strip()
         for i, data in enumerate(race_data):
             user = self.bot.get_user(int(data[2]))
-            embed.add_field(name=f"**#{i+1}**  {data[1]}  {data[3]}  {self.get_relative_time(winner_time, data[4]) if i != 0 else data[4]}",
+            time = self.get_relative_time(winner_time, data[4].split()[0].strip()) if i != 0 else winner_time
+            penalty = f' ({data[4].split()[-1]})' if len(data[4].split()) > 1 else ''
+            embed.add_field(name=f"**#{i+1}**  {data[1]}  {data[3]}  {time}{penalty}",
                             value=f"**{data[0]}** points ---- {user.mention}", inline=False)
 
         # add fastest lap data
