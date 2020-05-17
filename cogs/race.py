@@ -14,7 +14,6 @@ class Race(commands.Cog):
         self.spread = spread
         print("Loading Race Schedule")
         self.schedule = spread.get_worksheet(0).get_all_records()
-        self.last_next_race_message = None
 
     async def update(self, schedule):
         self.schedule = self.spread.get_worksheet(0).get_all_records()
@@ -34,11 +33,6 @@ class Race(commands.Cog):
             await context.send("There is no race scheduled...")
             return
 
-        # delete last race message (only if its voting message, generated from an allowed user)
-        if str(context.author.id) in USERS_ALLOWED_TO_SELECT_NEXT_RACE and self.last_next_race_message:
-            await self.last_next_race_message.delete()
-            self.last_next_race_message = None
-
         # create embed
         embed = discord.Embed(
             title = f"{race['Flag']}  {race['Name']} Grand Prix",
@@ -55,7 +49,6 @@ class Race(commands.Cog):
         if str(context.author.id) in USERS_ALLOWED_TO_SELECT_NEXT_RACE:
             await msg.add_reaction(Reaction.YES)
             await msg.add_reaction(Reaction.NO)
-        self.last_next_race_message = msg
 
     @commands.Cog.listener()
     async def on_reaction_add(self, reaction, user):
