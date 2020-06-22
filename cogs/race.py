@@ -1,12 +1,13 @@
+import urllib
+
 import discord
 from discord.ext import commands
 
-class Reaction:
-	YES = "\U00002705"
-	NO ="\U0000274C" 
-
-# eu, mario, luis
-USERS_ALLOWED_TO_SELECT_NEXT_RACE = ['122490947622666242','653739893364883466', '122495338404773894']
+def fix_url(url):
+    scheme, netloc, path, qs, anchor = urllib.parse.urlsplit(url)
+    path = urllib.parse.quote(path, '/%')
+    qs = urllib.parse.quote_plus(qs, ':&=')
+    return urllib.parse.urlunsplit((scheme, netloc, path, qs, anchor))
 
 class Race(commands.Cog):
     def __init__(self, bot, spread):
@@ -33,43 +34,29 @@ class Race(commands.Cog):
             await context.send("There is no race scheduled...")
             return
 
+        date = ["%02d" % int(x) for x in race['Date'].split('.')]
+        date = ''.join(date[::-1])
+        time = [int(x) for x in race['Hora'].split(':')]
+        timeEnd = [time[0]+1+(time[1]+30)//60, (time[1]+30)%60]
+        time=''.join((str(x) for x in time))
+        timeEnd=''.join((str(x) for x in timeEnd))
+        google_calendar_url = fix_url(f"https://calendar.google.com/calendar/render?action=TEMPLATE&text=Formula Moacs - {race['Name']} Grand Prix&dates={date}T{time}00Z/{date}T{timeEnd}00Z&location={race['Track Name']}%ctz=Europe/Lisbon")
+
         # create embed
         embed = discord.Embed(
             title = f"{race['Flag']}  {race['Name']} Grand Prix",
-            description = f"{race['Track Name']}\n[Download track]({race['Link']})",
+            description = f"""{race['Track Name']}
+                              > [Download Track]({race['Link']})
+                              > [Download Car](https://drive.google.com/file/d/1uNhPY2RhaLBBd3FWUSAKI11w_pESJjsg/view?usp=sharing)
+                              
+                              [Add event to Google Calendar]({google_calendar_url})
+                              """,
             colour = discord.Color.dark_red()
         )
         embed.set_image(url=f"https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/{race['Name']}.jpg.transform/9col/image.jpg")
-        embed.add_field(name='Members', value='-')
         embed.set_footer(text=f"{race['Date']} : {race['Hora']}",
                 icon_url='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/openmoji/242/spiral-calendar_1f5d3.png')
         msg = await context.send(embed=embed)
-
-        # limit voting to only these users
-        if str(context.author.id) in USERS_ALLOWED_TO_SELECT_NEXT_RACE:
-            await msg.add_reaction(Reaction.YES)
-            await msg.add_reaction(Reaction.NO)
-
-    @commands.Cog.listener()
-    async def on_reaction_add(self, reaction, user):
-        if user.bot:
-            return
-        embed = reaction.message.embeds[0]
-        if reaction.emoji == Reaction.YES:
-            if str(user.id) not in embed._fields[0]['value']:
-                if embed._fields[0]['value'] == "-":
-                    embed._fields[0]['value'] = ""
-                embed._fields[0]['value'] += f"{user.mention}"
-                await reaction.message.edit(embed=embed)
-        elif reaction.emoji == Reaction.NO:
-            embed._fields[0]['value'] = embed._fields[0]['value'].replace(f"<@!{user.id}>", "")
-            if embed._fields[0]['value'] == "":
-                embed._fields[0]['value'] = "-"
-            await reaction.message.edit(embed=embed)
-        else:
-            await user.send("Brinca Brinca...")
-        await reaction.message.remove_reaction(reaction.emoji, user)
-
 
     @commands.command(name='calendar', aliases=['c', 'cal', 'season'])
     async def _calendar(self, context):
